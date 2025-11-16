@@ -56,6 +56,59 @@ This project was developed as part of the **Backend Development Track (API + DB)
 ---
 
 ## ⚙️ Setup Instructions
+2️⃣ Configure the database
+
+Open:
+
+src/main/resources/application.properties
+
+
+Example PostgreSQL configuration:
+
+spring.datasource.url=jdbc:postgresql://localhost:5432/miniblog
+spring.datasource.username=your_username
+spring.datasource.password=your_password
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+
+
+Create a database manually: miniblog
+Update username/password as per your system.
+3️⃣ Build and Run
+
+Using Maven:
+
+mvn clean install
+mvn spring-boot:run
+
+
+Or run the main class from your IDE.
+
+4️⃣ Access the Application
+
+Open browser:
+
+http://localhost:8080
+
+
+Pages:
+
+URL	Description
+/register	Create a new account
+/login	Login to system
+/posts	View all posts
+/posts/new	Create new post
+/posts/view/{id}	View post + comments
+
+src/main/java/com/example/
+ ├── controller/       -> Handles web requests
+ ├── model/            -> Entities (User, Post, Comment)
+ ├── repository/       -> JPA Repositories
+ ├── service/          -> Business logic
+ ├── security/         -> Login, config, filters
+ └── MiniBlogApplication.java
+
 
 ### 1️⃣ Clone the repository
 ```bash
