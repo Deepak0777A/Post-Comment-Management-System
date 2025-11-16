@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/static/styles.css}" />
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #f3f4f6;
+            display: flex;
+            justify-content: center;  /* Horizontal center */
+            align-items: center;      /* Vertical center */
+        }
+
+        .container {
+            width: 350px;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #333;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            text-align: left;
+            font-size: 14px;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border: 1.5px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #4a90e2;
+            outline: none;
+        }
+
+        button {
+            padding: 12px;
+            background: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #357ac8;
+        }
+
+        a {
+            color: #4a90e2;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .alert {
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .alert-error {
+            background: #ffe1e1;
+            color: #b70000;
+        }
+
+        .alert-info {
+            background: #e3f2ff;
+            color: #0057b8;
+        }
+
+        .alert-success {
+            background: #e3ffe9;
+            color: #0b7a27;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Login</h1>
+
+    <div th:if="${param.error}" class="alert alert-error">Invalid username or password</div>
+    <div th:if="${param.logout}" class="alert alert-info">You have been logged out</div>
+    <div th:if="${param.registered}" class="alert alert-success">Registration successful. Please login.</div>
+
+    <form th:action="@{/login}" method="post" class="card">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <label>Username</label>
+        <input type="text" name="username" required />
+        <label>Password</label>
+        <input type="password" name="password" required />
+        <button type="submit">Login</button>
+    </form>
+
+    <p>No account? <a th:href="@{/register}">Register</a></p>
+</div>
+</body>
+</html>
